@@ -53,7 +53,7 @@
               <h4 class="modal-title" id="preview" style="word-wrap: break-word;">{{ $userPaste->title }}</h4>
             </div>
             <div class="modal-body">
-              <pre id="paste" style="color: #000; word-break: normal;"><code>{{ $userPaste->content }}</code></pre>
+              <pre id="paste" style="color: #000; word-break: normal;"><code><i>{{ $userPaste->content }}</i></code></pre>
             </div>
             <div class="modal-footer">
               @if ($userPaste->noSyntax == 0)
@@ -66,7 +66,7 @@
       </div>
 </td>
     {{-- Là on repasse à la date --}}
-    <td>{{ $userPaste->created_at->format('d/m/Y - H:i') }}</td>
+    <td>{{ $userPaste->created_at->format('d/m/Y') }}</td>
     {{-- <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td> --}}
     <td>
     <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}"><i class="fa fa-trash-o"></i></button></td>

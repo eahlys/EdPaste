@@ -143,7 +143,7 @@
 	<div class="row" @if ($noSyntax == true) style="margin-bottom:20px;" @endif>
 		<div class="col-sm-12">
 			<label for="paste"><i>@if ($noSyntax == false) Syntax-highlighted @else Plain-text @endif</i></label>
-			<pre id="paste"><code>{{ $content }}</code></pre>
+			<pre id="paste"><code>@if ($noSyntax == true)<i>@endif{{ $content }} @if ($noSyntax == true)</i>@endif</code></pre>
 		</div>
 	</div>
 
@@ -152,7 +152,7 @@
 	<div class="row" style="margin-bottom:20px;">
 		<div class="col-sm-12">
 			<label for="noFormatPaste"><i>Plain-text</i></label>
-			<textarea class="form-control input-sm" id="noFormatPaste" rows="25" readonly="true">{{ $content }}</textarea>
+			<i><textarea class="form-control input-sm" id="noFormatPaste" rows="25" readonly="true">{{ $content }}</textarea></i>
 		</div>
 	</div>
 	@endif
