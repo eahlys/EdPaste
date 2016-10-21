@@ -24,7 +24,7 @@
        <th>#</th>
        <th>Title</th>
        <th class="hidden-xs">Content</th>
-       <th>View</th>
+       <th></th>
        <th>Creation</th>
        <th>Actions</th>
      </tr>
