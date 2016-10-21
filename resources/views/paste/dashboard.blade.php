@@ -24,6 +24,7 @@
        <th>#</th>
        <th>Title</th>
        <th class="hidden-xs">Content</th>
+       <th>View</th>
        <th>Creation</th>
        <th>Actions</th>
      </tr>
@@ -32,11 +33,43 @@
     @foreach ($userPastes as $userPaste)
     <tr>
      <th scope="row">{{ $loop->iteration }}</th>
-     <td><a href="/{{ $userPaste->link }}">@if (strlen($userPaste->title) < 20) {{ $userPaste->title}} @else {{ mb_substr($userPaste->title,0,20,'UTF-8') }}... @endif</a></td>
+     <td><a href="/{{ $userPaste->link }}">@if (strlen($userPaste->title) <= 20) {{ $userPaste->title}} @else {{ mb_substr($userPaste->title,0,20,'UTF-8') }}... @endif</a></td>
      <td class="hidden-xs"><i>@if (strlen($userPaste->content) < 90) {{ $userPaste->content}} @else {{ mb_substr($userPaste->content,0,90,'UTF-8') }}... @endif</i></td>
-     <td>{{ $userPaste->created_at->format('d/m/Y - H:i') }}</td>
-     <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td>
-   </tr>
-   @endforeach
- </tbody>
+
+     {{-- Ici le bouton de preview suivi du modal --}}
+     <td>
+       <button class="btn btn-secondary btn-sm" type="button" data-toggle="modal" data-target="#preview{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}">
+        View
+      </button>
+      {{-- Ici le modal --}}
+      <!-- Modal -->
+      <div class="modal fade" id="preview{{ $loop->iteration }}" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">{{ $userPaste->title }}</h4>
+            </div>
+            <div class="modal-body">
+              <pre id="paste" style="color: #000; word-break: normal;"><code>{{ $userPaste->content }}</code></pre>
+            </div>
+            <div class="modal-footer">
+              @if ($userPaste->noSyntax == 0)
+              <a class="btn btn-primary" href="/{{ $userPaste->link }}" role="button" target="_blank">View formatted paste</a>
+              @endif
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</td>
+    {{-- Là on repasse à la date --}}
+    <td>{{ $userPaste->created_at->format('d/m/Y - H:i') }}</td>
+    {{-- <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td> --}}
+    <td><a class="btn btn-danger btn-sm pull-right" href="/users/delete/{{ $userPaste->link }}" role="button"><i class="fa fa-trash-o"></i></a></td>
+  </tr>
+  @endforeach
+</tbody>
 </table>

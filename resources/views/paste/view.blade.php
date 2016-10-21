@@ -86,7 +86,7 @@
 		{{-- Ici le petit panel de gestion --}}
 		@if ($sameUser == true)
 		<div class="col-sm-1">
-			<a class="btn btn-primary btn-sm pull-right hidden-xs" href="/users/delete/{{ $link }}" role="button"><i class="fa fa-trash-o"></i></a>
+			<a class="btn btn-danger btn-sm pull-right hidden-xs" href="/users/delete/{{ $link }}" role="button"><i class="fa fa-trash-o"></i></a>
 		</div>
 		@endif
 	</div>
