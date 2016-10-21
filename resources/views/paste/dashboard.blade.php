@@ -57,9 +57,9 @@
             </div>
             <div class="modal-footer">
               @if ($userPaste->noSyntax == 0)
-              <a class="btn btn-primary" href="/{{ $userPaste->link }}" role="button" target="_blank">View formatted paste</a>
+              <a class="btn btn-primary  btn-sm" href="/{{ $userPaste->link }}" role="button" target="_blank">View formatted paste</a>
               @endif
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -84,8 +84,8 @@
              Are you sure ?
             </div>
             <div class="modal-footer">
-              <a class="btn btn-danger" href="/users/delete/{{ $userPaste->link }}" role="button">Yes</a>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <a class="btn btn-danger btn-sm" href="/users/delete/{{ $userPaste->link }}" role="button">Yes</a>
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
             </div>
           </div>
         </div>

@@ -102,8 +102,8 @@
              Are you sure ?
             </div>
             <div class="modal-footer">
-              <a class="btn btn-danger" href="/users/delete/{{ $link }}" role="button">Yes</a>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
             </div>
           </div>
         </div>
