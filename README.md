@@ -19,6 +19,4 @@ Go to `http://your.vhost.server.com/` which leads to the DocumentRoot `/app/path
 You're free to fork this and modify it as you want (according to MIT license), but please don't remove my name at the bottom of each page. If you look at the code, you'll notice that all the comments are written in french, as I am a french developer and I don't wan't to waste time translating my own comments. If you want english comments instead, feel free to ask it, I'll translate all of these.
 
 # Todo :
-- User dashboard : WIP !
-- Users accout management isn't implemented yet
-- Admin panel
+- User dashboard isn't fully functionnal yet
