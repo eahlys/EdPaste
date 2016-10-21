@@ -68,8 +68,29 @@
     {{-- Là on repasse à la date --}}
     <td>{{ $userPaste->created_at->format('d/m/Y - H:i') }}</td>
     {{-- <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td> --}}
-    <td><a class="btn btn-danger btn-sm pull-right" href="/users/delete/{{ $userPaste->link }}" role="button"><i class="fa fa-trash-o"></i></a></td>
+    <td>
+    {{-- <a class="btn btn-danger btn-sm pull-right" href="/users/delete/{{ $userPaste->link }}" role="button"><i class="fa fa-trash-o"></i></a> --}}
+    <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}"><i class="fa fa-trash-o"></i></button></td>
   </tr>
+        <div class="modal fade" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete {{ $userPaste->title }} ?</h4>
+            </div>
+            <div class="modal-body">
+             Are you sure ?
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-danger" href="/users/delete/{{ $userPaste->link }}" role="button">Yes</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
   @endforeach
 </tbody>
 </table>
