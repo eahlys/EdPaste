@@ -98,9 +98,7 @@
               </button>
               <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $title }}</i>" ?</h4>
             </div>
-            <div class="modal-body">
-             Are you sure ?
-            </div>
+            <div class="modal-body">Are you sure ? You <b>cannot</b> undo this !</div>
             <div class="modal-footer">
               <a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
               <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>

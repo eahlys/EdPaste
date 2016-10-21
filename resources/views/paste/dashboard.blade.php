@@ -64,32 +64,30 @@
           </div>
         </div>
       </div>
-</td>
+    </td>
     {{-- Là on repasse à la date --}}
     <td>{{ $userPaste->created_at->format('d/m/Y') }}</td>
     {{-- <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td> --}}
     <td>
-    <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}"><i class="fa fa-trash-o"></i></button></td>
-  </tr>
-        <div class="modal fade" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $userPaste->title }}</i>" ?</h4>
-            </div>
-            <div class="modal-body">
-             Are you sure ?
-            </div>
-            <div class="modal-footer">
-              <a class="btn btn-danger btn-sm" href="/users/delete/{{ $userPaste->link }}" role="button">Yes</a>
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
-            </div>
+      <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}"><i class="fa fa-trash-o"></i></button></td>
+    </tr>
+    <div class="modal fade" id="delete{{ $loop->iteration }}" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $userPaste->title }}</i>" ?</h4>
           </div>
+          <div class="modal-body">Are you sure ? You <b>cannot</b> undo this !</div>
+         <div class="modal-footer">
+          <a class="btn btn-danger btn-sm" href="/users/delete/{{ $userPaste->link }}" role="button">Yes</a>
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
         </div>
       </div>
+    </div>
+  </div>
   @endforeach
 </tbody>
 </table>
