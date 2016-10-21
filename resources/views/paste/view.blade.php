@@ -1,3 +1,4 @@
+
 @extends('default')
 
 @section('pagetitle') {{ $title }} - EdPaste @endsection
@@ -95,7 +96,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "{{ $title }}" ?</h4>
+              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $title }}</i>" ?</h4>
             </div>
             <div class="modal-body">
              Are you sure ?
