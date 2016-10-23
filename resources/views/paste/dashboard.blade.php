@@ -29,7 +29,7 @@
        <th>Actions</th>
      </tr>
    </thead>
-   <tbody>
+ </tbody>
     @foreach ($userPastes as $userPaste)
     <tr>
      <th scope="row">{{ $loop->iteration }}</th>
