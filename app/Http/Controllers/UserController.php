@@ -21,6 +21,7 @@ class UserController extends Controller
 		return view('paste/dashboard', ['userPastes' => $userPastes]);
 	}
 	public function delete($link){
+		// TODO : Faudrait peut-être faire un post à la place
 		if (!Auth::check()) return redirect('/');
 		$userPaste = Paste::where('link', $link)->firstOrFail();
 		if ($userPaste->userId != Auth::user()->id) return redirect('/login');
