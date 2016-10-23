@@ -87,7 +87,7 @@
 		{{-- Ici le petit panel de gestion --}}
 		@if ($sameUser == true)
 		<div class="col-sm-1 hidden-xs">
-			 <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete" aria-expanded="false" aria-controls="collapse}"><i class="fa fa-trash-o"></i></button>
+			<button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete" aria-expanded="false" aria-controls="collapse}"><i class="fa fa-trash-o"></i></button>
 		</div>
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -100,7 +100,7 @@
             </div>
             <div class="modal-body">Are you sure ? You <b>cannot</b> undo this !</div>
             <div class="modal-footer">
-              <a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
+            <a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
               <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
             </div>
           </div>
