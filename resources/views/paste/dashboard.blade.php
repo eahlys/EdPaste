@@ -32,7 +32,7 @@
  </tbody>
     @foreach ($userPastes as $userPaste)
     <tr>
-     <th scope="row">{{ $loop->iteration }}</th>
+     <th scope="row"><i>{{ $loop->iteration }}</i></th>
      <td><a href="/{{ $userPaste->link }}">@if (strlen($userPaste->title) <= 20) {{ $userPaste->title}} @else {{ mb_substr($userPaste->title,0,20,'UTF-8') }}... @endif</a></td>
      <td class="hidden-xs"><i>@if (strlen($userPaste->content) < 90) {{ $userPaste->content}} @else {{ mb_substr($userPaste->content,0,90,'UTF-8') }}... @endif</i></td>
 
