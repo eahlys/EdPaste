@@ -1,6 +1,6 @@
 @extends('default')
 
-@section('pagetitle') Home - EdPaste @endsection
+@section('pagetitle') Home - EdPasted @endsection
 
 @section('navbar')
 <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
@@ -60,7 +60,7 @@
 				</span>
 				@endif
 			</div>
-		</div>				
+		</div>
 		<div class="row">
 			<div class="form-group col-sm-3">
 				<label for="expire">Paste expiration</label>
