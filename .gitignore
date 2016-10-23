@@ -16,7 +16,7 @@
 
 # sftp configuration file
 sftp-config.json
-deployment-config.json
+.remote-sync.json
 
 # Package control specific files
 Package Control.last-run
