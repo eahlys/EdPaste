@@ -57,7 +57,7 @@
             </div>
             <div class="modal-footer">
               @if ($userPaste->noSyntax == 0)
-              <a class="btn btn-primary  btn-sm" href="/{{ $userPaste->link }}" role="button" target="_blank">View formatted paste</a>
+                <a class="btn btn-primary  btn-sm" href="/{{ $userPaste->link }}" role="button" target="_blank">View formatted paste</a>
               @endif
               <button type="button" class="btn btn-secondary  btn-sm" data-dismiss="modal">Close</button>
             </div>
