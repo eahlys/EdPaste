@@ -236,7 +236,7 @@ class PasteController extends Controller
 				$sameUser = true;
 			}
 		}
-		
+
 		// Si tout est bon on retourne la vue view avec la paste
 		return view('paste/view', [
 			'username' => $username,
