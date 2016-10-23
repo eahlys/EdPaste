@@ -66,7 +66,7 @@
       </div>
     </td>
     {{-- Là on repasse à la date --}}
-    <td>{{ $userPaste->created_at->format('d/m/Y') }}</td>
+    <td>{{ $userPaste->created_at->format('M jS, Y') }}</td>
     {{-- <td><a href="/users/delete/{{ $userPaste->link }}">Delete</a></td> --}}
     <td>
       <button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseExample{{ $loop->iteration }}"><i class="fa fa-trash-o"></i></button></td>
