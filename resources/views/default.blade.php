@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<link rel="stylesheet" media="screen" href="https://paste.edraens.net/bootstrap.min.css">
+	<link rel="stylesheet" media="screen" href="/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald">
 	<link rel=stylesheet type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-	<script src="https://paste.edraens.net/jquery.js"></script>
-	<script src="https://paste.edraens.net/bootstrap.min.js"></script>
+	<script src="/jquery.js"></script>
+	<script src="/bootstrap.min.js"></script>
 	<!-- Salutations jeune fouineur ! :) -->
 	<title>@yield('pagetitle')</title>
 	<style>
