@@ -85,7 +85,7 @@ class PasteController extends Controller
 			'password' => $password,
 			'noSyntax' => $noSyntax,
 			]);
-		return redirect('https://paste.edraens.net/'.$generatedLink);
+		return redirect('/'.$generatedLink);
 	}
 
 	public function view($link){
