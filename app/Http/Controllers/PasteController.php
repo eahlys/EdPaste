@@ -265,7 +265,7 @@ class PasteController extends Controller
 
 		if (Hash::check(Input::get('pastePassword'), $paste->password)) {
 			Cookie::queue($paste->link, Input::get('pastePassword'), 15);
-			return redirect('https://paste.edraens.net/'.$link);
+			return redirect('/'.$link);
 		}
 		else {
 			return view('paste/password', ['link' => $paste->link, 'wrongPassword' => true]);
