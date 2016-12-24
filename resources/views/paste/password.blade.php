@@ -17,7 +17,7 @@
 @section('content')
 <div class="container">
     <div class="row" style="margin-top:25px;">
-        <form class="form-inline text-center" action="https://paste.edraens.net/{{ $link }}" method="post" accept-charset="utf-8">
+        <form class="form-inline text-center" action="/{{ $link }}" method="post" accept-charset="utf-8">
             {{ csrf_field() }}
             {{-- Ca c'est pour éviter que les navigateurs préremplissent les champs --}}
             <input style="display:none" type="text" name="fakeusernameremembered"/>
