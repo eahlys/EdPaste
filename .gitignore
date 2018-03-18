@@ -44,3 +44,4 @@ Homestead.json
 composer.phar
 /.vscode
 composer.lock
+/.vscode
