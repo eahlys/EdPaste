@@ -4,9 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed9df8b872992035f068a7fe461a635a",
-    "content-hash": "76036da3b5b55b91dbe1e1affa01bf9e",
+    "hash": "fdcd8f20bce5f9438f8aa2c629b42ff5",
+    "content-hash": "4f7884b181d68b0b0c6628f75e66ffdc",
     "packages": [
+        {
+            "name": "anhskohbo/no-captcha",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anhskohbo/no-captcha.git",
+                "reference": "07fd1583feae651c4db3652719f2d46fa23c4fd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anhskohbo/no-captcha/zipball/07fd1583feae651c4db3652719f2d46fa23c4fd4",
+                "reference": "07fd1583feae651c4db3652719f2d46fa23c4fd4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anhskohbo\\NoCaptcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "anhskohbo",
+                    "email": "anhskohbo@gmail.com"
+                }
+            ],
+            "description": "No CAPTCHA reCAPTCHA For Laravel.",
+            "keywords": [
+                "captcha",
+                "laravel",
+                "laravel4",
+                "laravel5",
+                "no-captcha",
+                "recaptcha"
+            ],
+            "time": "2016-08-24 16:35:03"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -983,6 +1028,56 @@
                 "uuid"
             ],
             "time": "2016-10-02 15:51:17"
+        },
+        {
+            "name": "soundasleep/html2text",
+            "version": "0.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/soundasleep/html2text.git",
+                "reference": "a1f77b8f340c8425b746bef1d1040189e89be334"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/soundasleep/html2text/zipball/a1f77b8f340c8425b746bef1d1040189e89be334",
+                "reference": "a1f77b8f340c8425b746bef1d1040189e89be334",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.0",
+                "soundasleep/component-tests": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Html2Text\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "EPL-1.0"
+            ],
+            "authors": [
+                {
+                    "name": "Jevon Wright",
+                    "homepage": "https://jevon.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP script to convert HTML into a plain text format",
+            "homepage": "https://github.com/soundasleep/html2text",
+            "keywords": [
+                "email",
+                "html",
+                "php",
+                "text"
+            ],
+            "time": "2016-06-09 04:56:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
