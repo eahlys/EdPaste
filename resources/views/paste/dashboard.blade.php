@@ -26,7 +26,6 @@
        <th class="hidden-xs">Content</th>
        <th></th>
        <th>Creation</th>
-	   <th>Status</th>
      </tr>
    </thead>
  </tbody>
