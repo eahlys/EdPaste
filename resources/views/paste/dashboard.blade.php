@@ -27,7 +27,6 @@
        <th></th>
        <th>Creation</th>
 	   <th>Status</th>
-       <th>Actions</th>
      </tr>
    </thead>
  </tbody>
