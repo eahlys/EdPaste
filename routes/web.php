@@ -22,3 +22,4 @@ Route::post('/{link}', 'PasteController@password')->where('link', '[a-zA-Z0-9]+'
 Route::get('users/dashboard', 'UserController@dashboard');
 Route::get('users/account', 'UserController@account');
 Route::get('/users/delete/{link}', 'UserController@delete')->where('link', '[a-zA-Z0-9]+');
+Route::post('users/account', 'UserController@editAccount');
