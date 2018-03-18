@@ -16,7 +16,7 @@
 
 @section('content')<div class="container">
       <div class="row">
-        <h2 class="text-center display-4">Account management</h2>
+        <h2 class="text-center display-4">Account managment</h2>
       </div>
       @if ( count( $errors ) > 0 )
         <div class="alert alert-danger">

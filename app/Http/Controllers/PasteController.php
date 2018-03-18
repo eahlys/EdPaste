@@ -98,8 +98,8 @@ class PasteController extends Controller
 		else $username = "Guest";
 
 		// On récupère le timestamp de la création de la paste et la différence entre maintenant et la création
-		$timestampCreated = $paste->created_at->timestamp;
-		$diffTimestamp = time() - $timestampCreated;
+		$timestampUpdated = $paste->updated_at->timestamp;
+		$diffTimestamp = time() - $timestampUpdated;
 
 		// On génère les messages d'expire et on fait expirer la paste dans la BDD si elle l'est
 		if($paste->expiration == "never") {
