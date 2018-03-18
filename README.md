@@ -13,10 +13,12 @@ Rename `.env.example` to `.env` and run `php artisan key:generate` from the app'
 Open `.env` and fill it with your database details, and with Secret and Site Key from Google's reCaptcha (in order to avoid spam from guests)
 Run `php artisan migrate` from the app's root path, and you're all done.
 
+In case of updating because of a Laravel version change, delete everything under `bootstrap/cache` and run `composer upgrade`.
+
 Go to `http://your.vhost.server.com/` which leads to the DocumentRoot `/app/path/public`, and this should work !
 
 # Contributing :
 You're free to fork this and modify it as you want (according to MIT license), but please don't remove my name at the bottom of each page. If you look at the code, you'll notice that all the comments are written in french, as I am a french developer and I don't wan't to waste time translating my own comments. If you want english comments instead, feel free to ask it, I'll translate all of these.
 
 # Todo :
-- Users accounts managements isn't implemented yet, as well as the users dashboard, I'm working on it.
+- Admin panel and password change
