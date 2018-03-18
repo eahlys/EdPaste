@@ -42,4 +42,5 @@ Homestead.json
 .env.php
 .env
 composer.phar
+/.vscode
 composer.lock
