@@ -24,9 +24,9 @@
        <th>#</th>
        <th>Title</th>
        <th class="hidden-xs">Content</th>
-       <th></th>
        <th>Creation</th>
-     </tr>
+       <th></th>
+      </tr>
    </thead>
  </tbody>
     @foreach ($userPastes as $userPaste)
