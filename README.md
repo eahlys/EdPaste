@@ -5,7 +5,7 @@ EdPaste is a Laravel 5.3 (PHP Framework)-driven self-hosted Pastebin. Demo : htt
 - Privacy options
 - Expiration options
 - Burn after reading
-- Password protection
+- Password protection (server-side hashed)
 - User dashboard
 - Raw paste viewing
 
