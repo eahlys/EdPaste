@@ -273,11 +273,134 @@ class PasteController extends Controller
 	}
 
 	// Le raw sert à rien mais je le laisse là au cas où
-	// public function raw($link){
-	// 	header('Content-Type: text/plain');
-	// 	$paste = Paste::where('link', $link)->firstOrFail();
-	// 	return view('paste/raw', [
-	// 		'content' => $paste->content,
-	// 		]);
-	// }
+	public function raw($link){
+		header('Content-Type: text/plain');
+		$paste = Paste::where('link', $link)->firstOrFail();
+
+		$timestampUpdated = $paste->updated_at->timestamp;
+		$diffTimestamp = time() - $timestampUpdated;
+
+		// On génère les messages d'expire et on fait expirer la paste dans la BDD si elle l'est
+		if($paste->expiration == "never") {
+			$expired = false;
+		}
+		elseif($paste->expiration == "burn") {
+			// Si la paste n'a jamais été vue, c'est donc que l'user qui l'a crée vient d'être redirect dessus, on gère ça ici
+			if ($diffTimestamp < 5) {
+				$expired = false;
+			}
+			// Si elle a déjà été vue une fois par son créateur, alors on la passe en mode burn after reading
+			else {
+				$expired = false;
+				$burn = true;
+			}
+		}
+		elseif($paste->expiration == "10m") {
+			if ($diffTimestamp > 600) $expired = true;
+			else $expired = false;
+		}
+		elseif($paste->expiration == "1h") {
+			if ($diffTimestamp > 3600) $expired = true;
+			else $expired = false;
+		}
+		elseif($paste->expiration == "1d") {
+			if ($diffTimestamp > 86400) $expired = true;
+			else $expired = false;
+		}
+		elseif($paste->expiration == "1w") {
+			if ($diffTimestamp > 604800) $expired = true;
+			else $expired = false;
+		}
+		elseif($paste->expiration == "expired") {
+			$alreadyExpired = true;
+			$expired = true;
+		}
+		// Si y'a un problème, on gère l'exception en arrêtant tout
+		else die('Fatal error.');
+		
+		// On regarde si la paste est expirée
+		if ($expired == true) {
+			// Si elle n'est pas marquée expirée dans la BDD, on la marque
+			if (!isset($alreadyExpired)) {
+				$paste->expiration = "expired";
+				$paste->save();
+			}
+			// On regarde si le créateur est connecté, si oui il peut voir sa paste expirée, sinon 404
+			if(Auth::check()) {
+				if ($paste->userId != Auth::user()->id) {
+					return view('errors/404');
+				}
+			}
+			else return view('errors/404');
+		}
+		if ($paste->privacy == "private") {
+			// On regarde si le créateur est connecté, si oui il peut voir sa paste expirée, sinon 404
+			if(Auth::check()) {
+				if ($paste->userId != Auth::user()->id) {
+					return view('errors/404');
+				}
+				else $privacy = "Private";
+			}
+			else return view('errors/404');
+		}
+		elseif ($paste->privacy == "password") {
+			// Si la paste a été crée y'a moins de 3 sec alors on demande pas le pass, c'est que l'user la regarde
+			if ($diffTimestamp > 3) {
+			// Ici on bypass le pass si l'user est le même
+				if(Auth::check()) {
+					if ($paste->userId != Auth::user()->id) {
+				// Si le cookie de password existe on le recheck un coup quand même
+						if (Cookie::get($paste->link) !== null) {
+					// On recheck le cookie et on envoie la view de password si le pass a été manipulé
+							if (Hash::check(Cookie::get($paste->link), $paste->password) == false) {
+								return view('paste/password', ['link' => $paste->link]);
+							}
+							else {
+							}
+						}
+				// Si il existe pas, on va demander le password
+						else {
+							return view('paste/password', ['link' => $paste->link]);
+						}
+					}
+				}
+				else {
+				// Si le cookie de password existe on le recheck un coup quand même
+					if (Cookie::get($paste->link) !== null) {
+					// On recheck le cookie et on envoie la view de password si le pass a été manipulé
+						if (Hash::check(Cookie::get($paste->link), $paste->password) == false) {
+							return view('paste/password', ['link' => $paste->link]);
+						}
+						else {
+						}
+					}
+				// Si il existe pas, on va demander le password
+					else {
+						return view('paste/password', ['link' => $paste->link]);
+					}
+				}
+			}
+			else $privacy = "Password-protected (bypassed)";
+		}
+		elseif ($paste->privacy == "link") {
+			$privacy = "Public";
+		}
+
+		// On regarde si la paste est en burn after reading (et donc qu'elle a été vue une seule fois, par son créateur, juste après la rédaction)
+		if (isset($burn)) {
+			$paste->expiration = "expired";
+			$paste->save();
+		}
+
+		// Ici on incrémente le compteur de vues à chaque vue
+		if ($diffTimestamp > 10) DB::table('pastes')->where('link', $link)->increment('views');
+
+		// On crée la var envoyée à la view disant si l'user créateur est le viewer
+		$sameUser = false;
+		if(Auth::check()) {
+			if ($paste->userId == Auth::user()->id) {
+			}
+		}
+		return response($paste->content, 200)->header('Content-Type', 'text/plain');
+	}
 }

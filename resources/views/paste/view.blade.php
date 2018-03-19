@@ -132,7 +132,7 @@
 				@else
 				<li><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="Privacy"></i> <i>{{ $privacy }}</i></li>
 				@endif
-
+				<li class="pull-right"><a href="/{{ $link }}/raw"><i>Raw paste</i></a></li>
 			</ul>
 		</div>
 	</div>
