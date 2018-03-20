@@ -40,7 +40,7 @@
     @foreach ($userPastes as $userPaste)
     <tr>
       <td><a href="/{{ $userPaste->link }}">@if (strlen($userPaste->title) <= 20) {{ $userPaste->title}} @else {{ mb_substr($userPaste->title,0,20,'UTF-8') }}... @endif</a></td>
-      <td class="hidden-xs"><i>@if (strlen($userPaste->content) < 90) {{ $userPaste->content}} @else {{ mb_substr($userPaste->content,0,90,'UTF-8') }}... @endif</i></td>
+      <td class="hidden-xs"><i>@if (!$userPaste->noSyntax) <i class="fa fa-file-code-o"></i> &nbsp; @endif @if (strlen($userPaste->content) < 90) {{ $userPaste->content}} @else {{ mb_substr($userPaste->content,0,90,'UTF-8') }}... @endif</i></td>
       {{--  Bloc d'infos  --}}
       <td class="hidden-xs">
         @if ($userPaste->privacy == "link") <i class="fa fa-globe" data-toggle="tooltip" data-placement="bottom" title="Public"></i> 
