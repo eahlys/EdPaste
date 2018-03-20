@@ -1,5 +1,5 @@
 # EdPaste
-EdPaste is a Laravel 5.3 (PHP Framework)-driven self-hosted Pastebin. Demo : https://paste.edra.ovh
+EdPaste is a Laravel 5.5 (PHP Framework)-driven self-hosted Pastebin. Demo : https://paste.edra.ovh
 
 ## Features :
 - Privacy options
