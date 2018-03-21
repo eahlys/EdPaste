@@ -31,7 +31,8 @@
         <tr>
           <th>Title</th>
           <th class="hidden-xs">Content</th>
-          <th class="hidden-xs">Details</th>
+          <th class="hidden-xs"></th>
+          <th class="hidden-xs"></th>
           <th>Creation</th>
           <th></th>
         </tr>
@@ -43,16 +44,16 @@
       <td class="hidden-xs"><i>@if (!$userPaste->noSyntax) <i class="fa fa-file-code-o"></i> &nbsp; @endif @if (strlen($userPaste->content) < 90) {{ $userPaste->content}} @else {{ mb_substr($userPaste->content,0,90,'UTF-8') }}... @endif</i></td>
       {{--  Bloc d'infos  --}}
       <td class="hidden-xs">
-        @if ($userPaste->privacy == "link") <i class="fa fa-globe" data-toggle="tooltip" data-placement="bottom" title="Public"></i> 
-        @elseif ($userPaste->privacy == "password") <i class="fa fa-key" data-toggle="tooltip" data-placement="bottom" title="Password-protected"></i> 
-        @elseif ($userPaste->privacy == "private") <i class="fa fa-user-secret" data-toggle="tooltip" data-placement="bottom" title="Private"></i> @endif 
+        @if ($userPaste->privacy == "link") <i class="fa fa-globe fa-lg" data-toggle="tooltip" data-placement="bottom" title="Public"></i> 
+        @elseif ($userPaste->privacy == "password") <i class="fa fa-key fa-lg" data-toggle="tooltip" data-placement="bottom" title="Password-protected"></i> 
+        @elseif ($userPaste->privacy == "private") <i class="fa fa-user-secret fa-lg" data-toggle="tooltip" data-placement="bottom" title="Private"></i> @endif 
 
-        @if ($userPaste->expiration == "never") <i class="fa fa-calendar" data-toggle="tooltip" data-placement="bottom" title="Never expires"></i> 
-        @elseif ($userPaste->expiration == "expired") <i class="fa fa-times" data-toggle="tooltip" data-placement="bottom" title="Expired"></i> 
-        @elseif ($userPaste->expiration == "burn") <i class="fa fa-fire" data-toggle="tooltip" data-placement="bottom" title="Burn after reading"></i> 
-        @else <i class="fa fa-hourglass-end" data-toggle="tooltip" data-placement="bottom" title="Expiration set"></i>@endif
-        &nbsp; <i class="fa fa-eye" data-toggle="tooltip" data-placement="bottom" title="Times viewed"></i> {{ $userPaste->views }}
+        @if ($userPaste->expiration == "0") <i class="fa fa-calendar-check-o fa-lg" data-toggle="tooltip" data-placement="bottom" title="Never expires"></i> 
+        @elseif ($userPaste->burnAfter == "1") <i class="fa fa-exclamation-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Burn after reading"></i>
+        @elseif (time() > strtotime($userPaste->expiration)) <i class="fa fa-calendar-times-o fa-lg" data-toggle="tooltip" data-placement="bottom" title="Expired"></i> 
+        @else <i class="fa fa-hourglass fa-lg" data-toggle="tooltip" data-placement="bottom" title="Expiration set"></i>@endif
       </td>
+      <td><i class="fa fa-eye fa-lg" data-toggle="tooltip" data-placement="bottom" title="Times viewed"></i> {{ $userPaste->views }}</td>
       {{-- Là on repasse à la date --}}
       <td>{{ $userPaste->created_at->format('M jS, Y') }}</td>
       <td>

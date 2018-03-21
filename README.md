@@ -28,8 +28,11 @@ Get latest features by pulling this repo again.
 
 In case of updating because of a Laravel version change, delete everything under `bootstrap/cache` and run `composer upgrade`.
 
+# Troubleshooting :
+If you get the "Paste expiration error.", then you need to migrate your database. Pastes expiration scheme changed recently, and your database has to be updated. Simply run `php artisan migrate` and everything will be good, without any data loss.
+
 # Contributing :
-You're free to fork this and modify it as you want (according to MIT license), but please don't remove my name at the bottom of each page. If you look at the code, you'll notice that all the comments are written in french, as I am a french developer and I don't wan't to waste time translating my own comments. If you want english comments instead, feel free to ask it, I'll translate all of these.
+You're free to fork this and modify it as you want (according to MIT license), but please don't remove my name at the bottom of each page. If you look at the code, you'll notice that all the comments are written in french, as I am a french developer. If you want english comments instead, feel free to ask it, I'll translate all of these.
 
 # Todo :
 - Admin panel

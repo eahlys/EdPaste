@@ -63,21 +63,10 @@
 
 @section('content')
 <div class="container">
-	@if ($expiration == "Burn after reading")
-	<div class="alert alert-danger" role="alert">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Be careful!</strong> <i>This paste is in burn after reading mode, which means it can be viewed only once.</i>
-	</div>
-	@elseif ($expiration == "Burn after reading (next time)")
-	<div class="alert alert-warning" role="alert">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Be careful!</strong> <i>You have selected burn after reading mode, keep in mind that refreshing this page before sharing the paste will destroy it.</i>
-	</div>
-	@endif
-	@if ($expired == true)
+	@if ($expiration == "Expired")
 	<div class="alert alert-info" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<i>This paste has expired, however since you've wrote it, you may view it whenever you want.</i>
+		<i>This paste has expired, however since you've wrote it you may view it whenever you want.</i>
 	</div>
 	@endif
 	<div class="row">
@@ -132,7 +121,6 @@
 				@else
 				<li><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="Privacy"></i> <i>{{ $privacy }}</i></li>
 				@endif
-				<li class="pull-right"><a href="/{{ $link }}/raw"><i>Raw paste</i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -140,7 +128,7 @@
 	{{-- N'est formaté que si le SH est activé --}}
 	<div class="row" @if ($noSyntax == true) style="margin-bottom:20px;" @endif>
 		<div class="col-sm-12">
-			<label for="paste"><i>@if ($noSyntax == false) Syntax-highlighted @else Plain-text @endif</i></label>
+			<label for="paste"><i>@if ($noSyntax == false) Syntax-highlighted @else Plain-text @endif</i></label><i class="pull-right"><a href="/{{ $link }}/raw">Raw paste</a></i>
 			<pre id="paste"><code>@if ($noSyntax == true)<i>@endif{{ $content }} @if ($noSyntax == true)</i>@endif</code></pre>
 		</div>
 	</div>
