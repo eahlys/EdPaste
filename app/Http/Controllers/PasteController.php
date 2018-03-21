@@ -136,7 +136,7 @@ class PasteController extends Controller
 				}
 				else $expiration = "Burn after reading";
 			}
-			elseif ($paste->expiration = "10m" || $paste->expiration = "1h" || $paste->expiration = "1d" || $paste->expiration = "1w" || $paste->expiration = "never" || $paste->expiration = "burn") die("Paste expiration error. Please make sure you have the latest commit of EdPaste and run 'php artisan migrate'.");
+			elseif ($paste->expiration == "10m" || $paste->expiration == "1h" || $paste->expiration == "1d" || $paste->expiration == "1w" || $paste->expiration == "never" || $paste->expiration == "burn") die("Paste expiration error. Please make sure you have the latest commit of EdPaste and run 'php artisan migrate'.");
 			else $expiration = "Never";
 			
 			// On s'occupe des options de vie privée de la paste
