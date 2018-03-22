@@ -116,7 +116,7 @@
 				<div class="checkbox">
 					<label><input type="checkbox" name="noSyntax">Disable syntax highlighting</label>
 				</div>
-				<button type="submit" id="submit" class="btn @if (count($errors) > 0) btn-danger @else btn-outline-success @endif  btn-lg" @if (!Auth::check()) data-toggle="tooltip" data-placement="right" title="Registered users have access to other privacy tools and can bypass captchas" @endif>Submit</button>
+				<button type="submit" id="submit" class="btn @if (count($errors) > 0) btn-danger @else btn-outline-success @endif  btn-lg" @if (!Auth::check()) data-toggle="tooltip" data-placement="top" title="Registered users have access to other privacy tools and can bypass captchas" @endif>Submit</button>
 			</div>
 		</div>
 

@@ -74,9 +74,9 @@
 		<i>This paste is in burn after reading. From now, it could be viewed only one time.</i>
 	</div>
 	@elseif ($expiration == "Burn after reading")
-	<div class="alert alert-warning" role="alert">
+	<div class="alert alert-danger" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<i>This paste is in burn after reading mode and has been destroyed.</i>
+		<i><strong>Be careful!</strong> This paste is in burn after reading mode and has been destroyed. You won't be able to see it again.</i>
 	</div>
 	@endif
 	<div class="row">
