@@ -36,3 +36,4 @@ You're free to fork this and modify it as you want (according to MIT license), b
 
 # Todo :
 - Admin panel
+- Fix raw view
