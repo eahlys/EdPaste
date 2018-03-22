@@ -63,32 +63,32 @@ class PasteController extends Controller
 		// Si l'user a choisi password-protected, on hash son pass, sinon on met 'disabled' dans la variable
 		if ($privacy == 'password') $password = bcrypt(Input::get('pastePassword'));
 		else $password = 'disabled';
-
+		
 		$burnAfter = 0;
 		// Ici on génère le timestamp d'expiration
 		switch ($expiration) {
 			case 'never':
-				$timestampExp = 0;
-				break;
+			$timestampExp = 0;
+			break;
 			case 'burn':
-				$timestampExp = date('Y-m-d H:i:s');
-				$burnAfter = 0;
-				break;
+			$timestampExp = date('Y-m-d H:i:s', time());
+			$burnAfter = 1;
+			break;
 			case '10m':
-				$timestampExp = date('Y-m-d H:i:s', time()+600);
-				break;
+			$timestampExp = date('Y-m-d H:i:s', time()+600);
+			break;
 			case '1h':
-				$timestampExp = date('Y-m-d H:i:s', time()+3600);
-				break;
+			$timestampExp = date('Y-m-d H:i:s', time()+3600);
+			break;
 			case '1d':
-				$timestampExp = date('Y-m-d H:i:s', time()+86400);
-				break;
+			$timestampExp = date('Y-m-d H:i:s', time()+86400);
+			break;
 			case '1w':
-				$timestampExp = date('Y-m-d H:i:s', time()+604800);
-				break;
+			$timestampExp = date('Y-m-d H:i:s', time()+604800);
+			break;
 			default:
-				die("User input error.");
-				break;
+			die("User input error.");
+			break;
 		}
 		
 		
@@ -134,8 +134,17 @@ class PasteController extends Controller
 					}
 					else $expiration = Carbon\Carbon::parse($paste->expiration)->diffForHumans();
 				}
-				else $expiration = "Burn after reading";
+				else {
+					// On retire le mode burn after reading que si la paste ne vient pas d'être crée
+					if (time() - strtotime($paste->expiration) > 3) {
+						$paste->burnAfter = 0;
+						$paste->save();
+						$expiration = "Burn after reading (next time)";
+					}
+					else $expiration = "Burn after reading";
+				}
 			}
+			// Petite vérification au cas où l'admin n'ait pas migrate
 			elseif ($paste->expiration == "10m" || $paste->expiration == "1h" || $paste->expiration == "1d" || $paste->expiration == "1w" || $paste->expiration == "never" || $paste->expiration == "burn") die("Paste expiration error. Please make sure you have the latest commit of EdPaste and run 'php artisan migrate'.");
 			else $expiration = "Never";
 			
@@ -197,10 +206,7 @@ class PasteController extends Controller
 			}
 			
 			// On regarde si la paste est en burn after reading (et donc qu'elle a été vue une seule fois, par son créateur, juste après la rédaction)
-			if (isset($burn)) {
-				$paste->expiration = "expired";
-				$paste->save();
-			}
+			
 			
 			// Ici on incrémente le compteur de vues à chaque vue
 			if (time()-$paste->created_at->timestamp > 10) DB::table('pastes')->where('link', $link)->increment('views');

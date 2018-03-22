@@ -68,6 +68,16 @@
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		<i>This paste has expired, however since you've wrote it you may view it whenever you want.</i>
 	</div>
+	@elseif ($expiration == "Burn after reading (next time)")
+	<div class="alert alert-warning" role="alert">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<i>This paste is in burn after reading. From now, it could be viewed only one time.</i>
+	</div>
+	@elseif ($expiration == "Burn after reading")
+	<div class="alert alert-warning" role="alert">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<i>This paste is in burn after reading mode and has been destroyed.</i>
+	</div>
 	@endif
 	<div class="row">
 		<div class="col-sm-11">
@@ -79,22 +89,22 @@
 			<button class="btn btn-danger btn-sm pull-right" type="button" data-toggle="modal" data-target="#delete" aria-expanded="false" aria-controls="collapse}"><i class="fa fa-trash-o"></i></button>
 		</div>
 		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="preview" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $title }}</i>" ?</h4>
-            </div>
-            <div class="modal-body">Are you sure ? You <b>cannot</b> undo this !</div>
-            <div class="modal-footer">
-            <a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
-            </div>
-          </div>
-        </div>
-      </div>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="preview" style="word-wrap: break-word;">Delete "<i>{{ $title }}</i>" ?</h4>
+					</div>
+					<div class="modal-body">Are you sure ? You <b>cannot</b> undo this !</div>
+					<div class="modal-footer">
+						<a class="btn btn-danger btn-sm" href="/users/delete/{{ $link }}" role="button">Yes</a>
+						<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		@endif
 	</div>
 	<div class="row">
@@ -114,7 +124,7 @@
 				@else
 				<li><i class="fa fa-clock-o" data-toggle="tooltip" data-placement="bottom" title="Expiration"></i> <i>{{ $expiration }}</i></li>
 				@endif
-
+				
 				{{-- Privacy cachée si xs --}}
 				@if ($privacy == "Public")
 				<li class="hidden-xs"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="Privacy"></i> <i>{{ $privacy }}</i></li>
@@ -124,7 +134,7 @@
 			</ul>
 		</div>
 	</div>
-
+	
 	{{-- N'est formaté que si le SH est activé --}}
 	<div class="row" @if ($noSyntax == true) style="margin-bottom:20px;" @endif>
 		<div class="col-sm-12">
@@ -132,7 +142,7 @@
 			<pre id="paste"><code>@if ($noSyntax == true)<i>@endif{{ $content }} @if ($noSyntax == true)</i>@endif</code></pre>
 		</div>
 	</div>
-
+	
 	{{-- N'apparaît que si le SH est activé --}}
 	@if ($noSyntax == false)
 	<div class="row" style="margin-bottom:20px;">
