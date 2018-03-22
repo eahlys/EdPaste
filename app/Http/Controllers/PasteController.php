@@ -48,11 +48,11 @@ class PasteController extends Controller
 		// On récupère les infos pour la paste
 		if (Auth::check()) $userId = Auth::id();
     else $userId = 0;
-
+    
     // Check titre
 		if (empty(Input::get('pasteTitle')) || preg_match('/^\s*$/', Input::get('pasteTitle'))) $title = 'Untitled';
     else $title = Input::get('pasteTitle');
-
+    
     // Recup IP et données
 		$ip = request()->ip();
 		$expiration = Input::get('expire');
@@ -121,17 +121,17 @@ class PasteController extends Controller
 			return redirect('/'.$generatedLink);
 		}
 		
-		public function view($link){
+		public function view($link, Request $request){
       $paste = Paste::where('link', $link)->firstOrFail();
       
       // Est-ce que l'utilisateur connecté est celui qui a écrit la paste ?
       if(Auth::user() == $paste->user && $paste->userId != 0) $isSameUser = true;
       else $isSameUser = false;
-
+      
       // Récupération du nom d'utilisateur
 			if($paste->userId != 0) $username = $paste->user->name;
 			else $username = "Guest";
-			
+      
 			// Expiration de la paste
 			if($paste->expiration != 0){
 				if ($paste->burnAfter == 0){
@@ -142,19 +142,17 @@ class PasteController extends Controller
 					else $expiration = Carbon\Carbon::parse($paste->expiration)->diffForHumans();
 				}
 				else {
-					// On retire le mode burn after reading que si la paste ne vient pas d'être crée
+					// On retire le mode burn after reading que si la paste ne vient pas d'être créée et que en cas de burn le pass est bon
 					if (time() - strtotime($paste->expiration) > 3) {
-						$paste->burnAfter = 0;
-						$paste->save();
+						$disableBurn = true;
 						$expiration = "Burn after reading";
 					}
 					else $expiration = "Burn after reading (next time)";
 				}
-			}
-			// Petite vérification au cas où l'admin n'ait pas migrate
+      }
+      // Petite vérification au cas où l'admin n'ait pas migrate
 			elseif ($paste->expiration == "10m" || $paste->expiration == "1h" || $paste->expiration == "1d" || $paste->expiration == "1w" || $paste->expiration == "never" || $paste->expiration == "burn") die("Paste expiration error. Please make sure you have the latest commit of EdPaste and run 'php artisan migrate'.");
 			else $expiration = "Never";
-      
       
       // On s'occupe des options de vie privée de la paste (TODO password)
       // https://stackoverflow.com/questions/30212390/laravel-middleware-return-variable-to-controller
@@ -162,50 +160,22 @@ class PasteController extends Controller
 				if($isSameUser) $privacy = "Private";
         else abort('404');
       }
-      elseif ($paste->privacy == "password") {
-        // Si la paste a été crée y'a moins de 3 sec alors on demande pas le pass, c'est que l'user la regarde
-        if (time() - $paste->updated_at->timestamp > 3) {
-          // Ici on bypass le pass si l'user est le même
-          if(Auth::check()) {
-            if ($paste->userId != Auth::user()->id) {
-              // Si le cookie de password existe on le recheck un coup quand même
-              if (Cookie::get($paste->link) !== null) {
-                // On recheck le cookie et on envoie la view de password si le pass a été manipulé
-                if (Hash::check(Cookie::get($paste->link), $paste->password) == false) {
-                  return view('paste/password', ['link' => $paste->link]);
-                }
-                else {
-                  $privacy = "Password-protected";
-                }
-              }
-              // Si il existe pas, on va demander le password
-              else {
-                return view('paste/password', ['link' => $paste->link]);
-              }
-            }
-            else $privacy = "Password-protected (bypassed)";
-          }
-          else {
-            // Si le cookie de password existe on le recheck un coup quand même
-            if (Cookie::get($paste->link) !== null) {
-              // On recheck le cookie et on envoie la view de password si le pass a été manipulé
-              if (Hash::check(Cookie::get($paste->link), $paste->password) == false) {
-                return view('paste/password', ['link' => $paste->link]);
-              }
-              else {
-                $privacy = "Password-protected";
-              }
-            }
-            // Si il existe pas, on va demander le password
-            else {
-              return view('paste/password', ['link' => $paste->link]);
-            }
-          }
+      elseif ($paste->privacy == "password"){
+        $privacy = "Password-protected";
+        if ($request->isMethod('post')) {
+          if(!Hash::check(Input::get('pastePassword'), $paste->password)) return view('paste/password', ['link' => $paste->link, 'wrongPassword' => true]);
         }
-        else $privacy = "Password-protected (bypassed)";
+        // Si l'user n'est pas le même et que la paste a été créée il y a plus de trois secondes :
+        elseif(!$isSameUser && time() - $paste->created_at->timestamp > 3) return view('paste/password', ['link' => $paste->link]);
       }
       elseif ($paste->privacy == "link") $privacy = "Public";
       else die("Error.");
+      
+      // Ici on vérifie si le burn de la paste doit être supprimé (besoin de le faire après le check password)
+      if (isset($disableBurn)) {
+        $paste->burnAfter = 0;
+        $paste->save();
+      }
       
       // Ici on incrémente le compteur de vues à chaque vue
       if (time()-$paste->updated_at->timestamp > 10) $paste->increment('views');

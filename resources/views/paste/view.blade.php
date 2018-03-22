@@ -76,7 +76,7 @@
 	@elseif ($expiration == "Burn after reading")
 	<div class="alert alert-danger" role="alert">
 		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<i><strong>Be careful!</strong> This paste is in burn after reading mode and has been destroyed. You won't be able to see it again.</i>
+		<i><strong>Be careful!</strong> This paste is in burn after reading mode and you won't be able to see it again.</i>
 	</div>
 	@endif
 	<div class="row">
@@ -138,7 +138,7 @@
 	{{-- N'est formaté que si le SH est activé --}}
 	<div class="row" @if ($noSyntax == true) style="margin-bottom:20px;" @endif>
 		<div class="col-sm-12">
-			<label for="paste"><i>@if ($noSyntax == false) Syntax-highlighted @else Plain-text @endif</i></label><i class="pull-right"><a href="/{{ $link }}/raw">Raw paste</a></i>
+			<label for="paste"><i>@if ($noSyntax == false) Syntax-highlighted @else Plain-text @endif</i></label>@if ($privacy != "Password-protected") <i class="pull-right"><a href="/{{ $link }}/raw">Raw paste</a> @endif </i>
 			<pre id="paste"><code>@if ($noSyntax == true)<i>@endif{{ $content }} @if ($noSyntax == true)</i>@endif</code></pre>
 		</div>
 	</div>
