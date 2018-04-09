@@ -33,6 +33,7 @@
           <th class="hidden-xs">Content</th>
           <th class="hidden-xs"></th>
           <th class="hidden-xs"></th>
+          <th class="hidden-xs">Views</th>
           <th>Creation</th>
           <th></th>
         </tr>
@@ -47,13 +48,14 @@
         @if ($userPaste->privacy == "link") <i class="fa fa-globe fa-lg" data-toggle="tooltip" data-placement="bottom" title="Public"></i> 
         @elseif ($userPaste->privacy == "password") <i class="fa fa-key fa-lg" data-toggle="tooltip" data-placement="bottom" title="Password-protected"></i> 
         @elseif ($userPaste->privacy == "private") <i class="fa fa-user-secret fa-lg" data-toggle="tooltip" data-placement="bottom" title="Private"></i> @endif 
-
+      </td>
+      <td class="hidden-xs">
         @if ($userPaste->expiration == "0") <i class="fa fa-calendar-check-o fa-lg" data-toggle="tooltip" data-placement="bottom" title="Never expires"></i> 
         @elseif ($userPaste->burnAfter == "1") <i class="fa fa-exclamation-circle fa-lg" data-toggle="tooltip" data-placement="bottom" title="Burn after reading"></i>
         @elseif (time() > strtotime($userPaste->expiration)) <i class="fa fa-calendar-times-o fa-lg" data-toggle="tooltip" data-placement="bottom" title="Expired"></i> 
         @else <i class="fa fa-hourglass fa-lg" data-toggle="tooltip" data-placement="bottom" title="Expiration set"></i>@endif
       </td>
-      <td><i class="fa fa-eye fa-lg" data-toggle="tooltip" data-placement="bottom" title="Times viewed"></i> {{ $userPaste->views }}</td>
+      <td> {{ $userPaste->views }}</td>
       {{-- Là on repasse à la date --}}
       <td>{{ $userPaste->created_at->format('M jS, Y') }}</td>
       <td>
