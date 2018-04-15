@@ -20,21 +20,10 @@ class PasteController extends Controller
 	}
 	
 	public function submit(Requests\StorePaste $request){
-		// On récupère les infos pour la paste
-		if (Auth::check()) $userId = Auth::id();
-        else $userId = 0;
-    
-        // Check titre
-		if (empty(Input::get('pasteTitle')) || preg_match('/^\s*$/', Input::get('pasteTitle'))) $title = 'Untitled';
-        else $title = Input::get('pasteTitle');
-    
-        // Recup IP et données
-		$ip = request()->ip();
+        $title = (empty(trim(Input::get('pasteTitle')))) ? 'Untitled' : Input::get('pasteTitle');
+
 		$expiration = Input::get('expire');
 		$privacy = Input::get('privacy');
-		if (Input::has('noSyntax')) $noSyntax = true;
-		else $noSyntax = false;
-		$content = Input::get('pasteContent');
 		
 		// Ici on vérifie que l'user a pas foutu le bronx dans les dropdown list
 		$possibleValuesPrivacy = array("link", "password", "private");
@@ -71,7 +60,6 @@ class PasteController extends Controller
 			break;
 		}
 		
-		
 		// Génération du lien tant que le lien existe
 		$generatedLink = str_random(10);
 		$existingPasteWithGeneratedLink = Paste::where('link', $generatedLink)->first();
@@ -82,19 +70,20 @@ class PasteController extends Controller
 		
 		Paste::create([
 			'link' => $generatedLink,
-			'userId' => $userId,
+			'userId' => (Auth::check()) ? Auth::id() : 0,
 			'views' => '0',
 			'title' => $title,
-			'content' => $content,
-			'ip' => $ip,
+			'content' => Input::get('pasteContent'),
+			'ip' => $request->ip(),
 			'expiration' => $timestampExp,
 			'privacy' => $privacy,
 			'password' => $password,
-			'noSyntax' => $noSyntax,
+			'noSyntax' => Input::has('noSyntax'),
 			'burnAfter' => $burnAfter,
-			]);
-			return redirect('/'.$generatedLink);
-		}
+        ]);
+
+		return redirect('/'.$generatedLink);
+    }
 		
 		public function view($link, Request $request){
       $paste = Paste::where('link', $link)->firstOrFail();
