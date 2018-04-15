@@ -19,41 +19,16 @@ class PasteController extends Controller
 		return view('paste/index');
 	}
 	
-	public function submit(Request $request){
-		// Messages custom
-		$messages = array(
-			'pasteContent.required' => 'Your paste cannot be empty',
-			'pastePassword.required_if' => 'Please enter a password',
-			'pasteTitle.max' => 'Title must not exceed 70 characters',
-			'g-recaptcha-response.required' => 'Captcha required',
-			'g-recaptcha-response.captcha' => 'Captcha required'
-    );
-    // Verif captcha si no auth
-		if (!Auth::check()) {
-			$this->validate($request, [
-				'pasteTitle' => 'max:70',
-				'pasteContent' => 'required',
-				'pastePassword' => 'required_if:privacy,password',
-				'g-recaptcha-response' => 'required|captcha',
-				'privacy' => 'required',
-			], $messages);
-		}
-		else {
-			$this->validate($request, [
-				'pasteTitle' => 'max:70',
-				'pasteContent' => 'required',
-				'pastePassword' => 'required_if:privacy,password',
-			], $messages);
-		}
+	public function submit(Requests\StorePaste $request){
 		// On récupère les infos pour la paste
 		if (Auth::check()) $userId = Auth::id();
-    else $userId = 0;
+        else $userId = 0;
     
-    // Check titre
+        // Check titre
 		if (empty(Input::get('pasteTitle')) || preg_match('/^\s*$/', Input::get('pasteTitle'))) $title = 'Untitled';
-    else $title = Input::get('pasteTitle');
+        else $title = Input::get('pasteTitle');
     
-    // Recup IP et données
+        // Recup IP et données
 		$ip = request()->ip();
 		$expiration = Input::get('expire');
 		$privacy = Input::get('privacy');
