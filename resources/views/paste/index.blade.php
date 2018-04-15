@@ -37,7 +37,7 @@
 		<div class="row">
 			<div class="form-group col-xs-12 @if ($errors->has('pasteTitle')) has-error @endif">
 				<label for="pasteTitle">Title</label>
-				<input type="text" class="form-control" name="pasteTitle" id="pasteTitle" placeholder="Title (optional)" maxlength="70" value="{{ old('pasteTitle') }}@if (isset($clonedTitle))Clone of : {{ $clonedTitle }}@endif">
+				<input type="text" class="form-control" name="pasteTitle" id="pasteTitle" placeholder="Title (optional)" maxlength="70" value="{{ old('pasteTitle') }}">
 				@if ($errors->has('pasteTitle'))
 				<span class="help-block">
 					<strong>{{ $errors->first('pasteTitle') }}</strong>
@@ -53,7 +53,7 @@
 						$("#pasteContent").autoGrow();
 					});
 				</script>
-				<textarea class="form-control input-sm" name="pasteContent" id="pasteContent" rows="15" placeholder="Paste your text here...">@if (isset($clonedContent)){{ $clonedContent }}@endif</textarea>
+				<textarea class="form-control input-sm" name="pasteContent" id="pasteContent" rows="15" placeholder="Paste your text here...">{{ old('pasteContent') }}</textarea>
 				@if ($errors->has('pasteContent'))
 				<span class="help-block">
 					<strong>{{ $errors->first('pasteContent') }}</strong>

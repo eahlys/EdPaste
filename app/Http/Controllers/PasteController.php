@@ -20,7 +20,7 @@ class PasteController extends Controller
 	}
 	
 	public function submit(Requests\StorePaste $request){
-        $title = (empty(trim(Input::get('pasteTitle')))) ? 'Untitled' : Input::get('pasteTitle');
+    $title = (empty(trim(Input::get('pasteTitle')))) ? 'Untitled' : Input::get('pasteTitle');
 
 		$expiration = Input::get('expire');
 		$privacy = Input::get('privacy');
