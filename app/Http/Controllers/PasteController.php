@@ -21,7 +21,7 @@ class PasteController extends Controller
 	
 	public function submit(Requests\StorePaste $request){
     $title = (empty(trim(Input::get('pasteTitle')))) ? 'Untitled' : Input::get('pasteTitle');
-
+    
 		$expiration = Input::get('expire');
 		$privacy = Input::get('privacy');
 		
@@ -80,21 +80,16 @@ class PasteController extends Controller
 			'password' => $password,
 			'noSyntax' => Input::has('noSyntax'),
 			'burnAfter' => $burnAfter,
-        ]);
-
-		return redirect('/'.$generatedLink);
+      ]);
+      
+      return redirect('/'.$generatedLink);
     }
 		
 		public function view($link, Request $request){
       $paste = Paste::where('link', $link)->firstOrFail();
       
       // Est-ce que l'utilisateur connecté est celui qui a écrit la paste ?
-      if(Auth::user() == $paste->user && $paste->userId != 0) $isSameUser = true;
-      else $isSameUser = false;
-      
-      // Récupération du nom d'utilisateur
-			if($paste->userId != 0) $username = $paste->user->name;
-			else $username = "Guest";
+      $isSameUser = ((Auth::user() == $paste->user && $paste->userId != 0)) ? true : false;
       
 			// Expiration de la paste
 			if($paste->expiration != 0){
@@ -146,7 +141,7 @@ class PasteController extends Controller
       
       // Renvoi de la view
       return view('paste/view', [
-        'username' => $username,
+        'username' => ($paste->userId != 0) ? $paste->user->name : "Guest",
         'views' => $paste->views,
         'sameUser' => $isSameUser,
         'link' => $link,
