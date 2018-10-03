@@ -19,7 +19,7 @@
     <h2 class="text-center display-4">Password prompt</h2>
     <div class="row" style="margin-top:25px;">
         <form class="form-inline text-center" action="/{{ $link }}" method="post" accept-charset="utf-8">
-            {{ csrf_field() }}
+            @csrf
             {{-- Ca c'est pour éviter que les navigateurs préremplissent les champs --}}
             <input style="display:none" type="text" name="fakeusernameremembered"/>
             <input style="display:none" type="password" name="fakepasswordremembered"/>
