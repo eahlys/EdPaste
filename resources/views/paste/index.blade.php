@@ -30,7 +30,7 @@
 @section('content')
 <div class="container">
 	<form action="/" method="post" accept-charset="utf-8">
-		{{ csrf_field() }}
+		@csrf
 		{{-- Ca c'est pour éviter que les navigateurs préremplissent les champs --}}
 		<input style="display:none" type="text" name="fakeusernameremembered"/>
 		<input style="display:none" type="password" name="fakepasswordremembered"/>
