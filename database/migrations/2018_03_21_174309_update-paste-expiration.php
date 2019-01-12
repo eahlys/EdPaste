@@ -13,11 +13,11 @@ class UpdatePasteExpiration extends Migration
     */
     public function up()
     {
-        Schema::table('pastes', function(Blueprint $table){
-            $table->boolean('burnAfter');
-            DB::statement('UPDATE pastes SET expiration = "1990-01-01 00:00:00" WHERE expiration IN ("expired", "10m", "1d", "1w", "1h", "burn");');
-            DB::statement('UPDATE pastes SET expiration = "0" WHERE expiration = "never";');
-        });
+//        Schema::table('pastes', function(Blueprint $table){
+//            $table->boolean('burnAfter');
+//            DB::statement('UPDATE pastes SET expiration = "1990-01-01 00:00:00" WHERE expiration IN ("expired", "10m", "1d", "1w", "1h", "burn");');
+//            DB::statement('UPDATE pastes SET expiration = "0" WHERE expiration = "never";');
+//        });
     }
     
     /**
