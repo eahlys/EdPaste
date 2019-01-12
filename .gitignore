@@ -5,6 +5,7 @@ PyCharm, CLion, Android Studio and WebStorm
 
 .idea/
 *.iml
+composer.phar
 
 # CMake
 cmake-build-debug/
