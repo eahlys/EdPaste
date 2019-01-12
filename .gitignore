@@ -1,47 +1,49 @@
+# Created by .ignore support plugin (hsz.mobi)
+### JetBrains by Edra template
+PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
-# Created by https://www.gitignore.io/api/sublimetext,laravel
+.idea/
+*.iml
 
-### SublimeText ###
-# cache files for sublime text
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
+# CMake
+cmake-build-debug/
+cmake-build-release/
 
-# workspace files are user-specific
-*.sublime-workspace
+# File-based project format
+*.iws
 
-# project files should be checked into the repository, unless a significant
-# proportion of contributors will probably not be using SublimeText
-*.sublime-project
+# IntelliJ
+out/
 
-# sftp configuration file
-sftp-config.json
-.remote-sync.json
+# mpeltonen/sbt-idea plugin
+.idea_modules/
 
-# Package control specific files
-Package Control.last-run
-Package Control.ca-list
-Package Control.ca-bundle
-Package Control.system-ca-bundle
-Package Control.cache/
-Package Control.ca-certs/
-bh_unicode_properties.cache
+# JIRA plugin
+atlassian-ide-plugin.xml
 
-# Sublime-github package stores a github token in this file
-# https://packagecontrol.io/packages/sublime-github
-GitHub.sublime-settings
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties### Laravel template
+vendor/
+node_modules/
+npm-debug.log
 
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
 
-### Laravel ###
-/bootstrap/compiled.php
-/vendor
-/node_modules
-Homestead.yaml
-Homestead.json
-.env.local.php
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+storage/*.key
+.env.*.php
 .env.php
 .env
-composer.phar
-/.vscode
-composer.lock
-/.vscode
+Homestead.yaml
+Homestead.json
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
