@@ -12,7 +12,7 @@ class Utf8mb4 extends Migration
     * @return void
     */
     public function up() {
-        DB::unprepared('ALTER TABLE `pastes` CONVERT TO CHARACTER SET utf8mb4');
+//        DB::unprepared('ALTER TABLE `pastes` CONVERT TO CHARACTER SET utf8mb4');
     }
     
     /**
